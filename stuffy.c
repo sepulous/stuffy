@@ -119,7 +119,7 @@ void add_file(char* archiveName, char* fileName)
         }
 
         TableEntry newEntry;
-        strncpy(newEntry.name, fileName, strlen(fileName));
+        strncpy(newEntry.name, fileName, sizeof(newEntry.name) - 1);
         newEntry.offset = tableOffset;
         newEntry.size = fileSize;
         fwrite(&newEntry, sizeof(TableEntry), 1, archive);
@@ -142,7 +142,7 @@ void add_file(char* archiveName, char* fileName)
         fileSize = ftell(file);
 
         TableEntry newEntry;
-        strncpy(newEntry.name, fileName, strlen(fileName));
+        strncpy(newEntry.name, fileName, sizeof(newEntry.name) - 1);
         newEntry.offset = 0;
         newEntry.size = fileSize;
 
